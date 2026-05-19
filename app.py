@@ -3,13 +3,16 @@ import os
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def hello():
     return jsonify({"message": "Hello, CI/CD!"})
 
+
 @app.route('/health')
 def health():
     return jsonify({"status": "healthy"})
+
 
 @app.route('/info')
 def info():
@@ -18,5 +21,6 @@ def info():
         "environment": os.getenv("ENVIRONMENT", "development")
     })
 
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000).0', port=5000)
