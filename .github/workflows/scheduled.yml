@@ -9,11 +9,12 @@ jobs:
   scheduled-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Build local Docker image
-        run: docker build -t flask-app-local .
-
-      - name: Run Scheduled Tests inside Docker
-        run: docker run --entrypoint "" flask-app-local pytest -v
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install flask==3.1.0 pytest==8.3.4
+      - name: Run scheduled tests
+        run: pytest -v
