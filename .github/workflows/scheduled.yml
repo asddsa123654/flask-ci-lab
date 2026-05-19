@@ -12,14 +12,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: 'pip'
+      - name: Build local Docker image
+        run: docker build -t flask-app-local .
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Run scheduled tests
-        run: pytest -v
+      - name: Run Scheduled Tests inside Docker
+        run: docker run --entrypoint "" flask-app-local pytest -v
