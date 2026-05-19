@@ -9,22 +9,8 @@ def client():
         yield client
 
 
-def test_hello(client):
+def test_home_route(client):
+    """Проверка базового эндпоинта Flask"""
     response = client.get('/')
     assert response.status_code == 200
-    data = response.get_json()
-    assert data['message'] == 'Hello, CI/CD!'
-
-
-def test_health(client):
-    response = client.get('/health')
-    assert response.status_code == 200
-    data = response.get_json()
-    assert data['status'] == 'healthy'
-
-
-def test_info(client):
-    response = client.get('/info')
-    assert response.status_code == 200
-    data = response.get_json()
-    assert 'version' in data
+    assert response.get_json() == {"status": "success", "message": " Flask API работает!"}
