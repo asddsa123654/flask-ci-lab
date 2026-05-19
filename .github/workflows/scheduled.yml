@@ -1,0 +1,24 @@
+name: Twice-a-week Audit
+
+on:
+  schedule:
+    - cron: '0 7 * * 2,4'
+  workflow_dispatch:
+
+jobs:
+  scheduled-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run scheduled tests
+        run: pytest -v
